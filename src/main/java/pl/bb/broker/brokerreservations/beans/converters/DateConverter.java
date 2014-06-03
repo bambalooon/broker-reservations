@@ -11,10 +11,10 @@ import javax.faces.convert.Converter;
  * Time: 00:37
  * To change this template use File | Settings | File Templates.
  */
-public class DateConverter implements Converter {
+public class DateConverter {// implements Converter {
 
-    @Override
+//    @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
-
+        return null;
     }
 }
