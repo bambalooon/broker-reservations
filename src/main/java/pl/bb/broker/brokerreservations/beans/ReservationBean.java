@@ -2,7 +2,9 @@ package pl.bb.broker.brokerreservations.beans;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import java.sql.Date;
+import javax.faces.bean.SessionScoped;
+import javax.validation.constraints.Future;
+import java.util.Date;
 
 /**
  * Created with IntelliJ IDEA.
@@ -39,20 +41,21 @@ public class ReservationBean {
     public Date getArrival() {
         return arrival;
     }
-    //time error but don't care - only date important
-    public void setArrival(java.util.Date arrival) {
-        this.arrival = new Date(arrival.getTime());
+
+    public void setArrival(Date arrival) {
+        this.arrival = arrival;
     }
 
     public Date getDeparture() {
         return departure;
     }
 
-    public void setDeparture(java.util.Date departure) {
-        this.departure = new Date(departure.getTime());
+    public void setDeparture(Date departure) {
+        this.departure = departure;
     }
 
     public String reserve() throws Exception {
+
         throw new Exception(this.roomType+": "+this.offerId);
 
     }
