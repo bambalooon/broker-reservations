@@ -28,11 +28,11 @@ public class DateValidator implements Validator {
         Date departure = (Date) value;
 
         if(!arrival.before(departure)) {
-            FacesMessage msg = new FacesMessage("Błędne daty - przyjazd musi być przed odjazdem!");
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Błędne daty - przyjazd musi być przed odjazdem!", null);
             throw new ValidatorException(msg);
         }
         if(arrival.before(new Date())) {
-            FacesMessage msg = new FacesMessage("Błędne daty - przyjazd może być najwcześniej jutro!");
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Błędne daty - przyjazd może być najwcześniej jutro!", null);
             throw new ValidatorException(msg);
         }
     }
