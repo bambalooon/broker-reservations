@@ -55,11 +55,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link PlBbBrokerCompanyCompanyreservationsExceptionsWSException }
+     * Create an instance of {@link PlBbBrokerCompanyCompanyreservWsExceptionsWSException }
      * 
      */
-    public PlBbBrokerCompanyCompanyreservationsExceptionsWSException createPlBbBrokerCompanyCompanyreservationsExceptionsWSException() {
-        return new PlBbBrokerCompanyCompanyreservationsExceptionsWSException();
+    public PlBbBrokerCompanyCompanyreservWsExceptionsWSException createPlBbBrokerCompanyCompanyreservWsExceptionsWSException() {
+        return new PlBbBrokerCompanyCompanyreservWsExceptionsWSException();
     }
 
     /**
@@ -79,12 +79,12 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link PlBbBrokerCompanyCompanyreservationsExceptionsWSException }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link PlBbBrokerCompanyCompanyreservWsExceptionsWSException }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://services.ws.companyreserv.company.broker.bb.pl/", name = "WSException")
-    public JAXBElement<PlBbBrokerCompanyCompanyreservationsExceptionsWSException> createWSException(PlBbBrokerCompanyCompanyreservationsExceptionsWSException value) {
-        return new JAXBElement<PlBbBrokerCompanyCompanyreservationsExceptionsWSException>(_WSException_QNAME, PlBbBrokerCompanyCompanyreservationsExceptionsWSException.class, null, value);
+    public JAXBElement<PlBbBrokerCompanyCompanyreservWsExceptionsWSException> createWSException(PlBbBrokerCompanyCompanyreservWsExceptionsWSException value) {
+        return new JAXBElement<PlBbBrokerCompanyCompanyreservWsExceptionsWSException>(_WSException_QNAME, PlBbBrokerCompanyCompanyreservWsExceptionsWSException.class, null, value);
     }
 
     /**
@@ -106,12 +106,12 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link PlBbBrokerCompanyCompanyreservationsExceptionsWSException }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link PlBbBrokerCompanyCompanyreservWsExceptionsWSException }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://services.ws.companyreserv.company.broker.bb.pl/", name = "ExceptionFault")
-    public JAXBElement<PlBbBrokerCompanyCompanyreservationsExceptionsWSException> createExceptionFault(PlBbBrokerCompanyCompanyreservationsExceptionsWSException value) {
-        return new JAXBElement<PlBbBrokerCompanyCompanyreservationsExceptionsWSException>(_ExceptionFault_QNAME, PlBbBrokerCompanyCompanyreservationsExceptionsWSException.class, null, value);
+    public JAXBElement<PlBbBrokerCompanyCompanyreservWsExceptionsWSException> createExceptionFault(PlBbBrokerCompanyCompanyreservWsExceptionsWSException value) {
+        return new JAXBElement<PlBbBrokerCompanyCompanyreservWsExceptionsWSException>(_ExceptionFault_QNAME, PlBbBrokerCompanyCompanyreservWsExceptionsWSException.class, null, value);
     }
 
     /**

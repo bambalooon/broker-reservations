@@ -7,7 +7,7 @@
     <groupId>pl.bb.broker.brokerreservations</groupId>
     <artifactId>broker-reservations</artifactId>
     <packaging>jar</packaging>
-    <version>${broker-reserv.version</version>
+    <version>${broker-reserv.version}</version>
     <name>broker-reservations</name>
 
     <properties>
@@ -16,7 +16,7 @@
         <broker-offer.version>1.0</broker-offer.version>
         <broker-reserv.version>1.0</broker-reserv.version>
         <jdk.version>1.7</jdk.version>
-        <faces.version>2.1.7</faces.version>
+        <faces.version>2.2.7</faces.version>
         <junit.version>4.11</junit.version>
         <jersey.version>1.8</jersey.version>
         <maven-compiler.version>3.1</maven-compiler.version>
@@ -32,6 +32,8 @@
         <annotation.version>1.2</annotation.version>
         <jaxws.version>2.2.11</jaxws.version>
         <javaee.version>7.0</javaee.version>
+        <mail.version>1.5.0-b01</mail.version>
+        <broker-auth.version>1.0</broker-auth.version>
     </properties>
 
     <repositories>
@@ -64,6 +66,13 @@
     </repositories>
 
     <dependencies>
+        <dependency>
+            <groupId>pl.bb.broker</groupId>
+            <artifactId>broker-authentication</artifactId>
+            <version>${broker-auth.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
         <dependency>
             <groupId>pl.bb.broker</groupId>
             <artifactId>broker-db</artifactId>
@@ -124,6 +133,13 @@
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
             <version>${javaee.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>${mail.version}</version>
+            <scope>provided</scope>
         </dependency>
 
     </dependencies>

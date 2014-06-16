@@ -19,14 +19,14 @@ public class WSException
      * Java type that goes as soapenv:Fault detail element.
      * 
      */
-    private PlBbBrokerCompanyCompanyreservationsExceptionsWSException faultInfo;
+    private PlBbBrokerCompanyCompanyreservWsExceptionsWSException faultInfo;
 
     /**
      * 
      * @param message
      * @param faultInfo
      */
-    public WSException(String message, PlBbBrokerCompanyCompanyreservationsExceptionsWSException faultInfo) {
+    public WSException(String message, PlBbBrokerCompanyCompanyreservWsExceptionsWSException faultInfo) {
         super(message);
         this.faultInfo = faultInfo;
     }
@@ -37,7 +37,7 @@ public class WSException
      * @param faultInfo
      * @param cause
      */
-    public WSException(String message, PlBbBrokerCompanyCompanyreservationsExceptionsWSException faultInfo, Throwable cause) {
+    public WSException(String message, PlBbBrokerCompanyCompanyreservWsExceptionsWSException faultInfo, Throwable cause) {
         super(message, cause);
         this.faultInfo = faultInfo;
     }
@@ -45,9 +45,9 @@ public class WSException
     /**
      * 
      * @return
-     *     returns fault bean: pl.bb.broker.brokerreservations.service.PlBbBrokerCompanyCompanyreservationsExceptionsWSException
+     *     returns fault bean: pl.bb.broker.brokerreservations.service.PlBbBrokerCompanyCompanyreservWsExceptionsWSException
      */
-    public PlBbBrokerCompanyCompanyreservationsExceptionsWSException getFaultInfo() {
+    public PlBbBrokerCompanyCompanyreservWsExceptionsWSException getFaultInfo() {
         return faultInfo;
     }
 

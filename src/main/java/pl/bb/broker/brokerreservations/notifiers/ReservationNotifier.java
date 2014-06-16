@@ -1,13 +1,21 @@
+package pl.bb.broker.brokerreservations.notifiers;
+
 import org.hibernate.HibernateException;
-import pl.bb.broker.brokerdb.broker.entities.CompaniesEntity;
-import pl.bb.broker.brokerdb.broker.entities.ReservationsEntity;
+import pl.bb.broker.brokerdb.broker.entities.*;
 import pl.bb.broker.brokerdb.util.BrokerDBReservUtil;
-import pl.bb.broker.brokerdb.util.HibernateConfiguration;
 import pl.bb.broker.brokerreservations.beans.ReservationBean;
 import pl.bb.broker.brokerreservations.service.*;
+import pl.bb.broker.settings.MailSettings;
 
+import javax.annotation.Resource;
+import javax.ejb.*;
 import javax.faces.application.FacesMessage;
-import java.lang.reflect.Field;
+import javax.faces.context.FacesContext;
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,40 +23,21 @@ import java.util.List;
 /**
  * Created with IntelliJ IDEA.
  * User: BamBalooon
- * Date: 02.06.14
- * Time: 20:06
+ * Date: 14.06.14
+ * Time: 01:51
  * To change this template use File | Settings | File Templates.
  */
 
+@Singleton
+@Startup
+@TransactionManagement(TransactionManagementType.BEAN)
+public class ReservationNotifier {
 
-public class Test {
+    @Resource(name = MailSettings.EMAIL_SESSION_JNDI_PATH)
+    private Session mailSession;
 
-    @org.junit.Test
-    public void test() throws Exception {
-        ReservationRequest request = new ReservationRequest();
-        request.setUsername("luffy");
-        request.setFirstname("luffy");
-        request.setSurname("Monkey D.");
-        request.setArrival(0L);
-        request.setDeparture(1000000000000L);
-        request.setFacility("scout camp");
-        request.setRoomType("N10");
-        ReservationResponse response = null;
-        ReservationService service = null;
-
-        ReservationServiceImplService serviceImpl = new ReservationServiceImplService(new URL("http://localhost/company-main/ws/reservations/?wsdl"));
-        service = serviceImpl.getReservationServiceImplPort();
-        response = service.makeReservation(request);
-    }
-
-    @org.junit.Test
-    public void TestNotify() throws Exception {
-        Field field = HibernateConfiguration.class.getDeclaredField("sessionFactory");
-        field.setAccessible(true);
-        field.set(null, TestHibernateUtil.getInstance());
-
-        System.out.println(BrokerDBReservUtil.FACTORY.getUserNewReservations("luffy"));
-
+    @Schedule(hour = "*", minute = "0,10,20,30,40,50", second = "0", persistent = false)
+    public void tryToReserve() throws Exception {
         List<ReservationsEntity> reservations =
                 BrokerDBReservUtil.FACTORY.getUnacceptedReservations();
         for(ReservationsEntity reserv : reservations) {
@@ -64,7 +53,20 @@ public class Test {
                 companies.add(company);
             }
         }
+        this.notify(companies);
+    }
 
+    private void notify(List<CompaniesEntity> companies) throws Exception {
+        for(CompaniesEntity company : companies) {
+            Message message = new MimeMessage(this.getEmailSession());
+            message.setFrom(new InternetAddress("reservations@broker.pl"));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(company.getEmail()));
+            message.setSubject("Rezerwacja");
+            message.setText("W serwisie pojawiły się oczekujące na zatwierdzenie rezerwacje. \n" +
+                    "Pozdrawiamy,\nDreamTeam Jednoosobowy");
+
+            Transport.send(message);
+        }
     }
 
     private void onlineReservation(ReservationsEntity reservation) {
@@ -94,6 +96,12 @@ public class Test {
                 BrokerDBReservUtil.FACTORY.updateReservation(reservation);
             } catch (HibernateException e) {}
         }
+        else if(response.getResponseType()==ResponseType.REJECTED) {
+            reservation.setAccepted(false);
+            try {
+                BrokerDBReservUtil.FACTORY.updateReservation(reservation);
+            } catch (HibernateException e) {}
+        }
     }
 
     private ReservationRequest createRequest(ReservationsEntity reservation) {
@@ -106,6 +114,10 @@ public class Test {
         request.setFirstname(reservation.getUser().getFirstname());
         request.setSurname(reservation.getUser().getSurname());
         return request;
+    }
+
+    private Session getEmailSession() throws Exception {
+        return mailSession;
     }
 
 }

@@ -6,8 +6,6 @@ import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
 import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.ws.Action;
-import javax.xml.ws.FaultAction;
 import javax.xml.ws.RequestWrapper;
 import javax.xml.ws.ResponseWrapper;
 
@@ -36,9 +34,6 @@ public interface ReservationService {
     @WebResult(targetNamespace = "")
     @RequestWrapper(localName = "makeReservation", targetNamespace = "http://services.ws.companyreserv.company.broker.bb.pl/", className = "pl.bb.broker.brokerreservations.service.MakeReservation")
     @ResponseWrapper(localName = "makeReservationResponse", targetNamespace = "http://services.ws.companyreserv.company.broker.bb.pl/", className = "pl.bb.broker.brokerreservations.service.MakeReservationResponse")
-    @Action(input = "http://services.ws.companyreserv.company.broker.bb.pl/ReservationService/makeReservationRequest", output = "http://services.ws.companyreserv.company.broker.bb.pl/ReservationService/makeReservationResponse", fault = {
-        @FaultAction(className = WSException.class, value = "http://services.ws.companyreserv.company.broker.bb.pl/ReservationService/makeReservation/Fault/WSException")
-    })
     public ReservationResponse makeReservation(
         @WebParam(name = "request", targetNamespace = "")
         ReservationRequest request)
